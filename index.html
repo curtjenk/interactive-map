@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html ng-app="interactiveMapApp">
+
+<head>
+    <title>Interactive Map</title>
+</head>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular.min.js"></script>
+<script type="text/javascript" src="js/states-object.js"></script>
+<script type="text/javascript" src="js/controller.js"></script>
+<link rel="stylesheet" type="text/css" href="css/styles.css">
+
+<body ng-controller="interactiveMapCtrl">
+    <div id="wrapper">
+        <div id="vote-bar-wrap">
+            <div class="arrow top"></div>
+            <div class="arrow bottom"></div>
+            <!-- <h3 class="blue">Democrat</h3>
+            <h3 class="red">Republican</h3> -->
+            <div id="color-bar">
+                <div id="blue-bar" class="bar blue-bar" ng-style="{'width': blueWidth}">
+                </div>
+                <div id="open-bar" class="bar open-bar" ng-style="{'width': openWidth}">
+                </div>
+                <div id="red-bar" class="bar red-bar" ng-style="{'width': redWidth}">
+                </div>
+            </div>
+        </div>
+        <div id="map-wrapper">
+            <svg width="750" height="500">
+                <g ng-repeat="state in states" ng-click="stateClicked(state)">
+                    <!-- start drawing -->
+                    <path class="state {{state.stateColor}}" ng-attr-d="{{state.vector}}" stroke="white">
+                    </path>
+                    <!-- Draw on the SVG just created -->
+                    <foreignObject ng-attr-x="{{state.nameX}}" ng-attr-y="{{state.nameY}}">
+                        <div class="state-info">
+                            {{state.abbr}}
+                            <br/>{{state.electoralVotes}}
+                        </div>
+                    </foreignObject>
+                </g>
+            </svg>
+        </div>
+    </div>
+</body>
+
+</html>

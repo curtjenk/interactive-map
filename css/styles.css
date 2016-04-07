@@ -1,0 +1,70 @@
+#map-wrapper {
+    width: 750px;
+    margin: auto;
+}
+
+#wrapper svg {
+    background-color: lightgrey;
+}
+
+.red {
+    fill: #BA3A33;  /*color for svg*/
+    color: #BA3A33;
+}
+
+.blue {
+    fill: #445e96;
+    color: #445e96;
+}
+
+.open {
+    fill: green;
+    color: green;
+}
+
+.state {
+    cursor: pointer;
+}
+
+.state-info {
+    color: white;
+    font-weight: bold;
+    font-size: 12px;
+}
+
+#vote-bar-wrap {
+    /*overflow: hidden;*/
+    /*position: relative;*/
+    /*top: 0;*/
+    /*left: 0;*/
+    width: 750px;
+    margin: auto;
+}
+
+#vote-bar-wrap .red{
+    float: right;
+}
+
+.bar {
+  height: 20px;
+}
+
+#blue-bar {
+  background-color: #445e96;
+  float: left;
+
+}
+
+#red-bar {
+  background-color: #BA3A33;
+  float: left;
+}
+
+#open-bar {
+  background-color: green;
+  float: left;
+}
+/*#color-bar {
+  margin: auto;
+}*/
+
