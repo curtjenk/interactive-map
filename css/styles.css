@@ -7,8 +7,24 @@
     background-color: lightgrey;
 }
 
+.red-small {
+    color: white;
+    background-color: #BA3A33;
+}
+
+.blue-small {
+    color: white;
+    background-color: #445e96;
+}
+
+.open-small {
+    color: white;
+    background-color: #c2b280;
+}
+
 .red {
-    fill: #BA3A33;  /*color for svg*/
+    fill: #BA3A33;
+    /*color for svg*/
     color: #BA3A33;
 }
 
@@ -18,8 +34,10 @@
 }
 
 .open {
-    fill: green;
-    color: green;
+    /* fill: green;
+    color: green;*/
+    fill: #c2b280;
+    color: #c2b280;
 }
 
 .state {
@@ -33,38 +51,44 @@
 }
 
 #vote-bar-wrap {
-    /*overflow: hidden;*/
-    /*position: relative;*/
-    /*top: 0;*/
-    /*left: 0;*/
+    overflow: hidden;
+    position: relative;
+    top: 0;
+    left: 0;
     width: 750px;
     margin: auto;
 }
 
-#vote-bar-wrap .red{
+#vote-bar-wrap .red {
     float: right;
 }
 
+#vote-bar-wrap .blue {
+    float: left;
+}
+
 .bar {
-  height: 20px;
+    height: 20px;
 }
 
 #blue-bar {
-  background-color: #445e96;
-  float: left;
-
+    background-color: #445e96;
+    float: left;
 }
 
 #red-bar {
-  background-color: #BA3A33;
-  float: left;
+    background-color: #BA3A33;
+    float: left;
 }
 
 #open-bar {
-  background-color: green;
-  float: left;
+    /*background-color: green;*/
+    background-color: #c2b280;
+    float: left;
 }
-/*#color-bar {
-  margin: auto;
-}*/
 
+#color-bar {
+    clear: both;
+    margin: auto;
+    text-align: center;
+}

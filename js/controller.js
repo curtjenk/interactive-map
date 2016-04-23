@@ -3,13 +3,28 @@ var interactiveMapApp = angular.module('interactiveMapApp', []);
 interactiveMapApp.controller('interactiveMapCtrl', function($scope) {
     resetStates();
     calculateStateTotals();
-
     $scope.states = states;
+    
     $scope.stateClicked = function(state) {
         var newColor = getNewColor(state);
         calculateStateTotals();
 
     };
+    $scope.reset = function() {
+        resetStates();
+        calculateStateTotals();
+        $scope.states = states;
+    }
+    $scope.smStateClicked = function(stateNdx) {
+        var newColor = getNewColor(states[stateNdx]);
+        calculateStateTotals();
+
+    };
+    // for (var i = 0; i < states.length; i++) {
+    //     if (states[i].isSmall) {
+    //         console.log(states[i].name);
+    //     }
+    // }
 
     function getNewColor(state) {
         if (state.stateColor === "red") {
@@ -44,9 +59,9 @@ interactiveMapApp.controller('interactiveMapCtrl', function($scope) {
         $scope.blueWidth = ($scope.blueStateVotes / totalElectoralVotes) * 100 + '%';
         $scope.redWidth = ($scope.redStateVotes / totalElectoralVotes) * 100 + '%';
         $scope.openWidth = ($scope.openStateVotes / totalElectoralVotes) * 100 + '%';
-        console.log($scope.blueStateVotes);
-        console.log($scope.redStateVotes);
-        console.log($scope.openStateVotes);
+        // console.log($scope.blueStateVotes);
+        // console.log($scope.redStateVotes);
+        // console.log($scope.openStateVotes);
     }
 
 
