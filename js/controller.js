@@ -1,7 +1,7 @@
 var interactiveMapApp = angular.module('interactiveMapApp', []);
 
 interactiveMapApp.controller('interactiveMapCtrl', function($scope) {
-
+    $scope.showMe = [{ name: 'curtis', age: 35 }];
     $scope.blueWinCombos = {};
     $scope.redWinCombos = {};
     resetStates();
@@ -64,7 +64,7 @@ interactiveMapApp.controller('interactiveMapCtrl', function($scope) {
 
         $scope.blueWinCombos = winningCombos($scope.blueStateVotes);
         $scope.redWinCombos = winningCombos($scope.redStateVotes)
-            // console.log($scope.redWinCombos);
+            //console.log($scope.redWinCombos);
     }
 
     function winningCombos(partyVotes) {
@@ -74,6 +74,7 @@ interactiveMapApp.controller('interactiveMapCtrl', function($scope) {
         var resultsMap = new Map();
         var cnt = 0;
         var open = openStates;
+        var uniqueCombo = [];
 
         var tempArr = [];
 
@@ -85,8 +86,8 @@ interactiveMapApp.controller('interactiveMapCtrl', function($scope) {
         var statesX
         while (cnt < 50) {
             iterations++;
-            if (iterations > 300) {
-                console.log("Spinning");
+            if (iterations > 1000) {
+                console.log("Spinning at " + cnt);
                 break;
             }
 
@@ -99,26 +100,35 @@ interactiveMapApp.controller('interactiveMapCtrl', function($scope) {
                 } else {
                     comboArr.push(tempArr[i].name);
                     sum += tempArr[i].electoralVotes;
+                    // if (sum === 270) {break;}
                 }
             }
             if (sum >= 270) {
-                statesX = comboArr.join(',');
-                if (resultsMap.has(statesX)) {
-                    //
-                } else {
+                statesX = comboArr.sort().join(',');
+                if (!uniqueCombo[statesX]) {
+                    uniqueCombo[statesX] = sum;
                     cnt++;
-                    resultsMap.set(statesX, sum);
-                    resultsArr.push(statesX);
                 }
-            } 
+                // if (resultsMap.has(statesX)) {
+                //     //
+                // } else {
+                //     cnt++;
+                //     resultsMap.set(statesX, sum);
+                //     resultsArr.push(statesX);
+                // }
+            }
             collection = [];
             sum = partyVotes;
             comboArr = [];
 
         }
 
-        resultsMap = undefined;
+        // resultsMap = undefined;
+        for (var key in uniqueCombo) {
+            resultsArr.push(key)
+        }
         return resultsArr;
+        // return resultsArr;
     }
 
     //shuffle using a version of knuth-shuffle algorithm
