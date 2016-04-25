@@ -1,10 +1,13 @@
 var interactiveMapApp = angular.module('interactiveMapApp', []);
 
 interactiveMapApp.controller('interactiveMapCtrl', function($scope) {
+
+    $scope.blueWinCombos = {};
+    $scope.redWinCombos = {};
     resetStates();
     calculateStateTotals();
     $scope.states = states;
-    
+
     $scope.stateClicked = function(state) {
         var newColor = getNewColor(state);
         calculateStateTotals();
@@ -20,11 +23,6 @@ interactiveMapApp.controller('interactiveMapCtrl', function($scope) {
         calculateStateTotals();
 
     };
-    // for (var i = 0; i < states.length; i++) {
-    //     if (states[i].isSmall) {
-    //         console.log(states[i].name);
-    //     }
-    // }
 
     function getNewColor(state) {
         if (state.stateColor === "red") {
@@ -38,7 +36,8 @@ interactiveMapApp.controller('interactiveMapCtrl', function($scope) {
         } else if (state.stateColor === "open") {
             state.stateColor = "red";
             redStates[state.id] = state;
-            openStates[state.id] = "";
+            // openStates[state.id] = "";
+            delete openStates[state.id];
         }
     }
 
@@ -62,8 +61,84 @@ interactiveMapApp.controller('interactiveMapCtrl', function($scope) {
         // console.log($scope.blueStateVotes);
         // console.log($scope.redStateVotes);
         // console.log($scope.openStateVotes);
+
+        $scope.blueWinCombos = winningCombos($scope.blueStateVotes);
+        $scope.redWinCombos = winningCombos($scope.redStateVotes)
+            // console.log($scope.redWinCombos);
     }
 
+    function winningCombos(partyVotes) {
+        var comboArr = [];
+        var sum = partyVotes;
+        var resultsArr = [];
+        var resultsMap = new Map();
+        var cnt = 0;
+        var open = openStates;
 
+        var tempArr = [];
+
+        for (var ndx in openStates) {
+            tempArr.push(openStates[ndx]);
+        }
+
+        var iterations = 0;
+        var statesX
+        while (cnt < 50) {
+            iterations++;
+            if (iterations > 300) {
+                console.log("Spinning");
+                break;
+            }
+
+            shuffle(tempArr);
+
+            for (var i = 0; i < tempArr.length; i++) {
+
+                if ((sum + tempArr[i].electoralVotes) > 270) {
+                    //
+                } else {
+                    comboArr.push(tempArr[i].name);
+                    sum += tempArr[i].electoralVotes;
+                }
+            }
+            if (sum >= 270) {
+                statesX = comboArr.join(',');
+                if (resultsMap.has(statesX)) {
+                    //
+                } else {
+                    cnt++;
+                    resultsMap.set(statesX, sum);
+                    resultsArr.push(statesX);
+                }
+            } 
+            collection = [];
+            sum = partyVotes;
+            comboArr = [];
+
+        }
+
+        resultsMap = undefined;
+        return resultsArr;
+    }
+
+    //shuffle using a version of knuth-shuffle algorithm
+    // in-place shuffle.
+    // https://github.com/coolaj86/knuth-shuffle
+    function shuffle(cardDeck) {
+        var currentIndex = cardDeck.length,
+            temporaryValue, randomIndex;
+
+        // While there remain elements to shuffle...
+        while (0 !== currentIndex) {
+
+            // Pick a remaining element...
+            randomIndex = Math.floor(Math.random() * currentIndex);
+            currentIndex -= 1;
+            //Now swap
+            temporaryValue = cardDeck[currentIndex];
+            cardDeck[currentIndex] = cardDeck[randomIndex];
+            cardDeck[randomIndex] = temporaryValue;
+        }
+    }
 
 });

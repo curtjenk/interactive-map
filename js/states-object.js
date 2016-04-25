@@ -80,7 +80,10 @@ function resetStates(){
             blueStates[states[i].id] = states[i];
         }else if(states[i].stateColor == 'red'){
             redStates[states[i].id] = states[i];
-        }else{
+        }else if(states[i].stateColor == 'open'){
+            // if (states[i].name.lenth == 0) {
+            //     console.log('error in states array');
+            // }
         	openStates[states[i].id] = states[i];
         }
     }
