@@ -10,82 +10,96 @@
 <link rel="stylesheet" type="text/css" href="css/styles.css">
 
 <body ng-controller="interactiveMapCtrl">
-    <div>
-        <div id="wrapper">
-            <div id="vote-bar-wrap">
-                <div class="arrow top"></div>
-                <div class="arrow bottom"></div>
-                <h3 class="blue">Democrat</h3>
-                <h3 class="red">Republican</h3>
-                <div id="color-bar">
-                    <div id="blue-bar" class="bar blue-bar" ng-style="{'width': blueWidth}">{{blueStateVotes}}
-                    </div>
-                    <div id="open-bar" class="bar open-bar" ng-style="{'width': openWidth}">{{openStateVotes}}
-                    </div>
-                    <div id="red-bar" class="bar red-bar" ng-style="{'width': redWidth}">{{redStateVotes}}
-                    </div>
+    <div id="wrapper">
+        <div id="vote-bar-wrap">
+            <div class="arrow top"></div>
+            <div class="arrow bottom"></div>
+            <h3 class="blue">Democrat</h3>
+            <h3 class="red">Republican</h3>
+            <div id="color-bar">
+                <div id="blue-bar" class="bar blue-bar" ng-style="{'width': blueWidth}">{{blueStateVotes}}
+                </div>
+                <div id="open-bar" class="bar open-bar" ng-style="{'width': openWidth}">{{openStateVotes}}
+                </div>
+                <div id="red-bar" class="bar red-bar" ng-style="{'width': redWidth}">{{redStateVotes}}
                 </div>
             </div>
-            <div id="map-wrapper">
-                <svg width="750" height="500">
-                    <g ng-repeat="state in states | filter : {'isSmall': false }" ng-click="stateClicked(state)">
-                        <!-- start drawing -->
-                        <path class="state {{state.stateColor}}" ng-attr-d="{{state.vector}}" stroke="white">
-                        </path>
-                        <!-- Draw on the SVG just created -->
-                        <foreignObject ng-attr-x="{{state.nameX}}" ng-attr-y="{{state.nameY}}">
-                            <div class="state-info">
-                                {{state.abbr}}
-                                <br/>{{state.electoralVotes}}
-                            </div>
-                        </foreignObject>
-                    </g>
-                </svg>
-            </div>
         </div>
-        <div style="position:absolute;top:525px;left:675px">
-            <button ng-click="reset()">Reset Map</button>
-        </div>
-        <div style="position:absolute;top:325px;left:920px">
-            <table cellspacing="5">
-                <tbody>
-                    <tr ng-click="smStateClicked(20)">
-                        <td class="map_text sp_state state {{states[20].stateColor+'-small'}}">{{states[20].electoralVotes}}</td>
-                        <td class="map_text">MA</td>
-                    </tr>
-                    <tr ng-click="smStateClicked(38)">
-                        <td class="map_text sp_state state {{states[38].stateColor+'-small'}}">{{states[38].electoralVotes}}</td>
-                        <td class="map_text">RI</td>
-                    </tr>
-                    <tr ng-click="smStateClicked(6)">
-                        <td class="map_text sp_state state {{states[6].stateColor+'-small'}}">{{states[6].electoralVotes}}</td>
-                        <td class="map_text">CT</td>
-                    </tr>
-                    <tr ng-click="smStateClicked(29)">
-                        <td class="map_text sp_state state {{states[29].stateColor+'-small'}}">{{states[29].electoralVotes}}</td>
-                        <td class="map_text">NJ</td>
-                    </tr>
-                    <tr ng-click="smStateClicked(7)">
-                        <td class="map_text sp_state state {{states[7].stateColor+'-small'}}">{{states[7].electoralVotes}}</td>
-                        <td class="map_text">DE</td>
-                    </tr>
-                    <tr ng-click="smStateClicked(48)">
-                        <td class="map_text sp_state state {{states[48].stateColor+'-small'}}">{{states[48].electoralVotes}}</td>
-                        <td class="map_text">MD</td>
-                    </tr>
-                    <tr ng-click="smStateClicked(8)">
-                        <td class="map_text sp_state state {{states[8].stateColor+'-small'}}">{{states[8].electoralVotes}}</td>
-                        <td class="map_text">DC</td>
-                    </tr>
-                </tbody>
-            </table>
+        <div id="map-wrapper">
+            <svg width="750" height="500">
+                <g ng-repeat="state in states | filter : {'isSmall': false }" ng-click="stateClicked(state)">
+                    <!-- start drawing -->
+                    <path class="state {{state.stateColor}}" ng-attr-d="{{state.vector}}" stroke="white">
+                    </path>
+                    <!-- Draw on the SVG just created -->
+                    <foreignobject ng-attr-x="{{state.nameX}}" ng-attr-y="{{state.nameY}}">
+                        <div class="state-info">
+                            {{state.abbr}}
+                            <br/>{{state.electoralVotes}}
+                        </div>
+                    </foreignobject>
+                </g>
+            </svg>
         </div>
     </div>
+
+    <!-- <div id="reset-btn">
+        <button ng-click="reset()">Reset Map</button>
+    </div> -->
+    <div id="small-states">
+        <table cellspacing="5">
+            <tbody>
+                <tr ng-click="smStateClicked(20)">
+                    <td class="map_text sp_state state {{states[20].stateColor+'-small'}}">{{states[20].electoralVotes}}</td>
+                    <td class="map_text">MA</td>
+                </tr>
+                <tr ng-click="smStateClicked(38)">
+                    <td class="map_text sp_state state {{states[38].stateColor+'-small'}}">{{states[38].electoralVotes}}</td>
+                    <td class="map_text">RI</td>
+                </tr>
+                <tr ng-click="smStateClicked(6)">
+                    <td class="map_text sp_state state {{states[6].stateColor+'-small'}}">{{states[6].electoralVotes}}</td>
+                    <td class="map_text">CT</td>
+                </tr>
+                <tr ng-click="smStateClicked(29)">
+                    <td class="map_text sp_state state {{states[29].stateColor+'-small'}}">{{states[29].electoralVotes}}</td>
+                    <td class="map_text">NJ</td>
+                </tr>
+                <tr ng-click="smStateClicked(7)">
+                    <td class="map_text sp_state state {{states[7].stateColor+'-small'}}">{{states[7].electoralVotes}}</td>
+                    <td class="map_text">DE</td>
+                </tr>
+                <tr ng-click="smStateClicked(48)">
+                    <td class="map_text sp_state state {{states[48].stateColor+'-small'}}">{{states[48].electoralVotes}}</td>
+                    <td class="map_text">MD</td>
+                </tr>
+                <tr ng-click="smStateClicked(8)">
+                    <td class="map_text sp_state state {{states[8].stateColor+'-small'}}">{{states[8].electoralVotes}}</td>
+                    <td class="map_text">DC</td>
+                </tr>
+                <tr>
+                  <td colspan="2">
+                    <div id="">
+                        <button ng-click="reset()">Reset Map</button>
+                    </div>
+                  </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
     <div>
-        <div id="red-ways" ng-repeat="stateList in redWinCombos">
-            {{stateList}}
+        <div class="combos red">
+            <h2>Red State Ways To Win</h2>
+            <div id="red-ways" ng-repeat="stateList in redWinCombos">
+                {{stateList}}
+            </div>
         </div>
-        <div id="blue-ways">
+        <div class="combos blue">
+            <h2>Blue State Ways To Win</h2>
+            <div id="blue-ways" ng-repeat="stateList in blueWinCombos">
+                {{stateList}}
+            </div>
         </div>
     </div>
 </body>

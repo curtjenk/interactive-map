@@ -1,55 +1,48 @@
+body {
+  background-color: lightgrey;
+}
 #map-wrapper {
     width: 750px;
     margin: auto;
 }
-
 #wrapper svg {
-    background-color: lightgrey;
-}
 
+}
 .red-small {
     color: white;
     background-color: #BA3A33;
 }
-
 .blue-small {
     color: white;
     background-color: #445e96;
 }
-
 .open-small {
     color: white;
     background-color: #c2b280;
 }
-
 .red {
     fill: #BA3A33;
     /*color for svg*/
     color: #BA3A33;
 }
-
 .blue {
     fill: #445e96;
     color: #445e96;
 }
-
 .open {
     /* fill: green;
     color: green;*/
     fill: #c2b280;
     color: #c2b280;
 }
-
 .state {
     cursor: pointer;
 }
-
 .state-info {
     color: white;
     font-weight: bold;
     font-size: 12px;
 }
-
 #vote-bar-wrap {
     overflow: hidden;
     position: relative;
@@ -58,37 +51,47 @@
     width: 750px;
     margin: auto;
 }
-
 #vote-bar-wrap .red {
     float: right;
 }
-
 #vote-bar-wrap .blue {
     float: left;
 }
-
 .bar {
     height: 20px;
 }
-
 #blue-bar {
     background-color: #445e96;
     float: left;
 }
-
 #red-bar {
     background-color: #BA3A33;
     float: left;
 }
-
 #open-bar {
     /*background-color: green;*/
     background-color: #c2b280;
     float: left;
 }
-
 #color-bar {
     clear: both;
     margin: auto;
+    text-align: center;
+}
+#reset-btn {
+    position: absolute;
+    top: 55%;
+    left: 57%;
+}
+#small-states {
+    position: absolute;
+    top: 40%;
+    left: 70%
+}
+.combos {
+    float: left;
+    width: 50%;
+}
+.combos h2 {
     text-align: center;
 }

@@ -63,7 +63,7 @@ interactiveMapApp.controller('interactiveMapCtrl', function($scope) {
         // console.log($scope.openStateVotes);
 
         $scope.blueWinCombos = winningCombos($scope.blueStateVotes);
-        $scope.redWinCombos = winningCombos($scope.redStateVotes)
+        $scope.redWinCombos = winningCombos($scope.redStateVotes);
             //console.log($scope.redWinCombos);
     }
 
@@ -71,7 +71,7 @@ interactiveMapApp.controller('interactiveMapCtrl', function($scope) {
         var comboArr = [];
         var sum = partyVotes;
         var resultsArr = [];
-        var resultsMap = new Map();
+        // var resultsMap = new Map();
         var cnt = 0;
         var open = openStates;
         var uniqueCombo = [];
@@ -83,7 +83,7 @@ interactiveMapApp.controller('interactiveMapCtrl', function($scope) {
         }
 
         var iterations = 0;
-        var statesX
+        var statesX = [];
         while (cnt < 50) {
             iterations++;
             if (iterations > 1000) {
@@ -94,6 +94,15 @@ interactiveMapApp.controller('interactiveMapCtrl', function($scope) {
             shuffle(tempArr);
 
             for (var i = 0; i < tempArr.length; i++) {
+                // sum += tempArr[i].electoralVotes;
+                // if (sum <= 270 ) {
+                //   comboArr.push(tempArr[i].name);
+                //   if (sum == 270) {
+                //     break;
+                //   }
+                // } else {
+                //   sum -= tempArr[i].electoralVotes;
+                // }
 
                 if ((sum + tempArr[i].electoralVotes) > 270) {
                     //
@@ -109,13 +118,6 @@ interactiveMapApp.controller('interactiveMapCtrl', function($scope) {
                     uniqueCombo[statesX] = sum;
                     cnt++;
                 }
-                // if (resultsMap.has(statesX)) {
-                //     //
-                // } else {
-                //     cnt++;
-                //     resultsMap.set(statesX, sum);
-                //     resultsArr.push(statesX);
-                // }
             }
             collection = [];
             sum = partyVotes;
@@ -125,9 +127,10 @@ interactiveMapApp.controller('interactiveMapCtrl', function($scope) {
 
         // resultsMap = undefined;
         for (var key in uniqueCombo) {
-            resultsArr.push(key)
+            resultsArr.push(key);
         }
-        return resultsArr;
+
+        return resultsArr.sort();
         // return resultsArr;
     }
 
